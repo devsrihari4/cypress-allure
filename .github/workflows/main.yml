@@ -8,14 +8,14 @@ jobs:
     strategy:
             fail-fast: false
             matrix:
-             containers: [ 0 ]
+             containers: [ 0,1,2,3 ]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install Packages
         run: npm install
       - name: Run Tests
-        run: npx cypress run --env allure=true
+        run: npx cypress run --env allure=true --spec $(node cypress-parallel.js ${{ matrix.containers }} 4)
       
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
