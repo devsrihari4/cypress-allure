@@ -1,0 +1,24 @@
+{
+  "name": "cypress-allure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devsrihari4/cypress-allure.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devsrihari4/cypress-allure/issues"
+  },
+  "homepage": "https://github.com/devsrihari4/cypress-allure#readme",
+  "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.41.0",
+    "cypress": "^13.15.0"
+  }
+}
