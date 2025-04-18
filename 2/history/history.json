@@ -1,0 +1,1 @@
+{"9560f74c21930b7caa3634d647f52e6f":{"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"items":[{"uid":"2e1687ad05ec084","reportUrl":"https://devsrihari4.github.io/cypress-allure/2//#testresult/2e1687ad05ec084","status":"passed","time":{"start":1744987864401,"stop":1744987864604,"duration":203}}]}}
