@@ -23,7 +23,6 @@ jobs:
         with:
           name: ReportsData
           path: allure-results
-          overwrite: true
   job2:
     name: reports
     if: always()

@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/devsrihari4/cypress-allure#readme",
   "devDependencies": {
-    "@shelex/cypress-allure-plugin": "^2.41.0",
-    "cypress": "^13.15.0"
+    "@shelex/cypress-allure-plugin": "^2.40.2",
+    "cypress": "^12.6.0"
   }
 }
