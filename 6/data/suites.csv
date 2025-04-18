@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","0","Oops...we found an error preparing this test file: cypress/e2e/test1.cy.js","","Fri Apr 18 15:22:21 GMT 2025","broken","Fri Apr 18 15:22:21 GMT 2025","","cypress/e2e/test1.cy.js","",""
