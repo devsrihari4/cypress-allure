@@ -1,0 +1,59 @@
+name: Cypress Automation Tests
+on:
+  workflow_dispatch:
+jobs:
+  job1:
+    name: cypress-run
+    runs-on: ubuntu-latest
+    strategy:
+            fail-fast: false
+            matrix:
+             containers: [ 0,1,2,3 ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Packages
+        run: npm install
+      # 1. Run Cypress
+      - name: Run Cypress Tests
+        run: npx cypress run --env allure=true --spec $(node cypress-parallel.js ${{ matrix.containers }} 4)
+        env:
+          SPLIT: ${{ strategy.job-total }}
+          SPLIT_INDEX: ${{ strategy.job-index }} 
+      # 2. Upload Cypress Results
+      - name: Upload Cypress Results
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: cypress-results-${{ strategy.job-index }}
+          path: allure-results # Your results folder path
+          retention-days: 1
+
+  # Merge Cypress Test Results Job
+  merge-test-results:
+    runs-on: ubuntu-latest # Your runner
+    needs: job1 # Ensure this job runs after all cypress run jobs have finished
+    if: success() || failure()
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      # 3. Download Cypress Results, since they're saved from the previous job
+      - name: Download Cypress Results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: cypress-results-*
+          path: allure-results # Your results folder path
+          merge-multiple: true
+      # 4. Merge Cypress Results - Call the merge script
+      - name: Merge Test Results
+        run: node cypress/merge-results.js # Your merge script path
+      # 5. Upload Merged Results 
+      - name: Upload Merged Report
+        uses: actions/upload-artifact@v4
+        with:
+          overwrite: true
+          path: cypress/results/merged-results.json # Your merged results output file
+          if-no-files-found: ignore
+          retention-days: 7
