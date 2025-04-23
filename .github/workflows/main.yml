@@ -21,7 +21,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ReportsData-${{ github.run_number }}
+          name: ReportsData
           path: allure-results
           # overwrite: true
   job2:
@@ -33,7 +33,7 @@ jobs:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v4
         with:
-          name: ReportsData-${{ github.run_number }}
+          name: ReportsData
           path: allure-results 
       - name: Get Allure history
         uses: actions/checkout@v2
