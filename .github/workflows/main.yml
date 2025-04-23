@@ -39,6 +39,10 @@ jobs:
           pattern: ReportsData-*
           path: allure-results
           merge-multiple: true
+
+      - name: Generate allure report
+        run: npx allure generate allure-results --clean
+
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
