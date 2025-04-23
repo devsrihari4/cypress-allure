@@ -16,12 +16,15 @@ jobs:
         run: npm install
       - name: Run Tests
         run: npx cypress run --env allure=true --spec $(node cypress-parallel.js ${{ matrix.containers }} 4)
+        env:
+          SPLIT: ${{ strategy.job-total }}
+          SPLIT_INDEX: ${{ strategy.job-index }} 
       
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ReportsData
+          name: ReportsData-${{ strategy.job-index }}
           path: allure-results
           # overwrite: true
   job2:
@@ -33,8 +36,9 @@ jobs:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v4
         with:
-          name: ReportsData
-          path: allure-results 
+          name: ReportsData-*
+          path: allure-results
+          merge-multiple: true
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
